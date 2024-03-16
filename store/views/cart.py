@@ -12,3 +12,10 @@ class Cart(View):
         print(products)
         return render(request , 'cart.html' , {'products' : products} )
 
+    def post(self, request):
+        if 'clear_cart' in request.POST:
+            # Если в POST-запросе есть ключ "clear_cart", очищаем содержимое корзины
+            request.session['cart'] = {}
+            # Перенаправляем пользователя на страницу корзины после очистки
+            return redirect('cart')  # Замените 'cart' на имя URL-шаблона для вашего представления корзины
+        # Дополнительные обработки POST-запросов, если нужно
